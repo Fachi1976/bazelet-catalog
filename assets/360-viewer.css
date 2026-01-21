@@ -1,0 +1,315 @@
+/* Bazelet 360° Viewer Styles */
+
+:root {
+    --bazelet-blue: #005c8d;
+    --bazelet-blue-dark: #004a73;
+    --bazelet-green: #94c11f;
+    --bazelet-green-dark: #7da819;
+}
+
+/* 360 Button */
+.btn-360-view {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, var(--bazelet-green) 0%, var(--bazelet-green-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+    width: 100%;
+    font-family: inherit;
+}
+
+.btn-360-view:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(148, 193, 31, 0.4);
+}
+
+.btn-360-view svg {
+    animation: rotate360icon 4s linear infinite;
+}
+
+@keyframes rotate360icon {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Modal Overlay */
+.viewer-360-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 92, 141, 0.92);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.viewer-360-overlay.active {
+    display: flex;
+}
+
+/* Modal Content */
+.viewer-360-modal {
+    background: white;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Modal Header */
+.viewer-360-header {
+    padding: 18px 24px;
+    background: var(--bazelet-blue);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.viewer-360-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.viewer-360-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.viewer-360-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tabs */
+.viewer-360-tabs {
+    display: flex;
+    padding: 16px 24px 0;
+    gap: 8px;
+    background: #f5f7f9;
+}
+
+.viewer-360-tab {
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    background: white;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.viewer-360-tab.active {
+    background: var(--bazelet-green);
+    color: white;
+    border-color: var(--bazelet-green);
+}
+
+.viewer-360-tab:hover:not(.active) {
+    border-color: var(--bazelet-blue);
+    color: var(--bazelet-blue);
+}
+
+/* Viewer Container */
+.viewer-360-container {
+    padding: 24px;
+    background: #f5f7f9;
+}
+
+.viewer-360-display {
+    width: 100%;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #e8ecf0;
+}
+
+.viewer-360-display img {
+    max-width: 88%;
+    max-height: 88%;
+    object-fit: contain;
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.35s ease-in-out;
+}
+
+.viewer-360-display img.active {
+    opacity: 1;
+}
+
+/* Loading */
+.viewer-360-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.viewer-360-spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid #e8ecf0;
+    border-top-color: var(--bazelet-blue);
+    border-radius: 50%;
+    animation: spin360 0.8s linear infinite;
+}
+
+@keyframes spin360 {
+    to { transform: rotate(360deg); }
+}
+
+/* Badge */
+.viewer-360-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--bazelet-green);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.viewer-360-badge svg {
+    animation: rotate360icon 3s linear infinite;
+}
+
+/* Frame Counter */
+.viewer-360-counter {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: var(--bazelet-blue);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* Controls */
+.viewer-360-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px 24px;
+    background: #f5f7f9;
+}
+
+.viewer-360-play-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: #666;
+}
+
+.viewer-360-play-btn:hover {
+    border-color: var(--bazelet-blue);
+    color: var(--bazelet-blue);
+}
+
+.viewer-360-play-btn.playing {
+    background: var(--bazelet-green);
+    border-color: var(--bazelet-green);
+    color: white;
+}
+
+.viewer-360-speed {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.viewer-360-speed input[type="range"] {
+    width: 120px;
+    accent-color: var(--bazelet-green);
+    height: 6px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .viewer-360-display {
+        height: 300px;
+    }
+
+    .viewer-360-tabs {
+        padding: 12px 16px 0;
+    }
+
+    .viewer-360-tab {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+
+    .viewer-360-container {
+        padding: 16px;
+    }
+
+    .viewer-360-controls {
+        flex-wrap: wrap;
+        padding: 12px 16px 20px;
+        gap: 12px;
+    }
+
+    .viewer-360-title {
+        font-size: 1rem;
+    }
+}
