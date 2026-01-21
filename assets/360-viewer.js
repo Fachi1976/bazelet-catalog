@@ -12,7 +12,7 @@
     const PRODUCTS_360 = {
         'preroll-slims-standard': {
             name: 'Pre-Roll Slims Standard',
-            nameHe: 'קופסא סטנדרטית למגולגלות',
+            nameHe: 'קופסא סטנדרטית',
             views: {
                 closed: { frames: 8, label: 'סגור' },
                 open: { frames: 8, label: 'פתוח' }
