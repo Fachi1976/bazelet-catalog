@@ -343,22 +343,17 @@
     // =====================================================
     // AUTO-INJECT BUTTONS (customize this for your site)
     // =====================================================
- function injectButtons() {
+function injectButtons() {
         Object.keys(PRODUCTS_360).forEach(productId => {
             const product = PRODUCTS_360[productId];
-            const allCards = document.querySelectorAll('div[class*="card"], div[class*="product"], div[class*="Card"]');
+            const allCards = document.querySelectorAll('.product-card');
             
             allCards.forEach(card => {
                 if (card.querySelector('.btn-360-view')) return;
                 
-                const cardText = card.textContent || '';
-                if (cardText.includes(product.nameHe) || cardText.includes(product.name)) {
-                    const existingButton = card.querySelector('button, a[class*="button"]');
-                    if (existingButton && existingButton.parentElement) {
-                        if (!existingButton.parentElement.querySelector('.btn-360-view')) {
-                            existingButton.parentElement.appendChild(create360Button(productId));
-                        }
-                    }
+                const productName = card.querySelector('.product-name');
+                if (productName && productName.textContent.includes(product.nameHe)) {
+                    card.appendChild(create360Button(productId));
                 }
             });
         });
