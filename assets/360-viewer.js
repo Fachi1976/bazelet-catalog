@@ -45,6 +45,15 @@
             open: { frames: 6, label: 'פתוח' }
         },
         defaultView: 'closed'
+    },
+    'preroll-shorts-box': {
+        name: 'Pre-Roll Shorts Box',
+        nameHe: 'קופסא ל-4 מגשים',
+        views: {
+            closed: { frames: 9, label: 'סגור' },
+            open: { frames: 8, label: 'פתוח' }
+        },
+        defaultView: 'closed'
     }
         // Add more products here as needed:
         // 'product-id': {
