@@ -41,7 +41,7 @@
         name: 'Flower Gift',
         nameHe: 'קופסא לשקית תפרחת פרימיום',
         views: {
-            closed: { frames: 6, label: 'סגור' },
+            closed: { frames: 7, label: 'סגור' },
             open: { frames: 6, label: 'פתוח' }
         },
         defaultView: 'closed'
