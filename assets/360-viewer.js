@@ -27,8 +27,7 @@
             open: { frames: 6, label: 'פתוח' }
         },
         defaultView: 'closed'
-   
-        
+   }
         // Add more products here as needed:
         // 'product-id': {
         //     name: 'Product Name',
