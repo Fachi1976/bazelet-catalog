@@ -343,28 +343,21 @@
     // =====================================================
     // AUTO-INJECT BUTTONS (customize this for your site)
     // =====================================================
-    function injectButtons() {
-        // This function looks for product cards and adds 360° buttons
-        // Customize the selectors based on your site structure
-        
+ function injectButtons() {
         Object.keys(PRODUCTS_360).forEach(productId => {
-            // Try to find product card by various methods
-            // Method 1: Look for elements with data-product-id attribute
-            const cardById = document.querySelector(`[data-product-id="${productId}"]`);
-            if (cardById && !cardById.querySelector('.btn-360-view')) {
-                cardById.appendChild(create360Button(productId));
-                return;
-            }
-            
-            // Method 2: Look for card containing product name in text
             const product = PRODUCTS_360[productId];
-            const allCards = document.querySelectorAll('.product-card, .card, [class*="product"]');
+            const allCards = document.querySelectorAll('div[class*="card"], div[class*="product"], div[class*="Card"]');
+            
             allCards.forEach(card => {
-                if (card.textContent.includes(product.name) || card.textContent.includes(product.nameHe)) {
-                    if (!card.querySelector('.btn-360-view')) {
-                        // Find a good place to insert the button
-                        const buttonContainer = card.querySelector('.card-actions, .product-actions, .buttons') || card;
-                        buttonContainer.appendChild(create360Button(productId));
+                if (card.querySelector('.btn-360-view')) return;
+                
+                const cardText = card.textContent || '';
+                if (cardText.includes(product.nameHe) || cardText.includes(product.name)) {
+                    const existingButton = card.querySelector('button, a[class*="button"]');
+                    if (existingButton && existingButton.parentElement) {
+                        if (!existingButton.parentElement.querySelector('.btn-360-view')) {
+                            existingButton.parentElement.appendChild(create360Button(productId));
+                        }
                     }
                 }
             });
