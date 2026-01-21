@@ -17,8 +17,17 @@
                 closed: { frames: 8, label: 'סגור' },
                 open: { frames: 8, label: 'פתוח' }
             },
-            defaultView: 'closed'
-        }
+        defaultView: 'closed'
+    },
+    'preroll-slims-gift': {
+        name: 'Pre-Roll Slims Gift',
+        nameHe: 'קופסת מתנה',
+        views: {
+            closed: { frames: 6, label: 'סגור' },
+            open: { frames: 6, label: 'פתוח' }
+        },
+        defaultView: 'closed'
+    }
         // Add more products here as needed:
         // 'product-id': {
         //     name: 'Product Name',
