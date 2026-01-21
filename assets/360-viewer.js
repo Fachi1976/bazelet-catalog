@@ -27,7 +27,17 @@
             open: { frames: 6, label: 'פתוח' }
         },
         defaultView: 'closed'
+   },
+    'preroll-slims-tube': {
+        name: 'Pre-Roll Slims Tube',
+        nameHe: 'תרמיל בודד',
+        views: {
+            closed: { frames: 4, label: 'סגור' },
+            open: { frames: 4, label: 'פתוח' }
+        },
+        defaultView: 'closed'
     }
+        
         // Add more products here as needed:
         // 'product-id': {
         //     name: 'Product Name',
