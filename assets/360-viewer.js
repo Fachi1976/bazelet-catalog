@@ -12,7 +12,7 @@
     const PRODUCTS_360 = {
         'preroll-slims-standard': {
             name: 'Pre-Roll Slims Standard',
-            nameHe: 'קופסא סטנדרטית',
+            nameHe: 'קופסא פתיחה עליונה',
             views: {
                 closed: { frames: 8, label: 'סגור' },
                 open: { frames: 8, label: 'פתוח' }
@@ -21,7 +21,7 @@
     },
     'preroll-slims-gift': {
         name: 'Pre-Roll Slims Gift',
-        nameHe: 'קופסת מתנה',
+        nameHe: 'קופסא פתיחת מתנה',
         views: {
             closed: { frames: 6, label: 'סגור' },
             open: { frames: 6, label: 'פתוח' }
