@@ -27,7 +27,25 @@
             open: { frames: 6, label: 'פתוח' }
         },
         defaultView: 'closed'
-   }
+   },
+    'flower-standard': {
+        name: 'Flower Standard',
+        nameHe: 'קופסא לשקית תפרחת',
+        views: {
+            closed: { frames: 6, label: 'סגור' },
+            open: { frames: 6, label: 'פתוח' }
+        },
+        defaultView: 'closed'
+    },
+    'flower-gift': {
+        name: 'Flower Gift',
+        nameHe: 'קופסא לשקית תפרחת פרימיום',
+        views: {
+            closed: { frames: 6, label: 'סגור' },
+            open: { frames: 6, label: 'פתוח' }
+        },
+        defaultView: 'closed'
+    }
         // Add more products here as needed:
         // 'product-id': {
         //     name: 'Product Name',
