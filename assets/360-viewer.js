@@ -108,7 +108,7 @@
             open: { frames: 5, label: 'פתוח' }
         },
         defaultView: 'closed'
-    }},
+    },
     'combo-sativa-indica-vertical': {
         name: 'Combo Sativa Indica Vertical',
         nameHe: 'קופסא לשני מיכלי תפרחת אחד על השני',
