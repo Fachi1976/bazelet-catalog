@@ -54,6 +54,24 @@
             open: { frames: 8, label: 'פתוח' }
         },
         defaultView: 'closed'
+    },
+    'minis-box-bag': {
+        name: 'Minis Box Bag',
+        nameHe: 'קופסא לשקית תפרחת מיניז',
+        views: {
+            closed: { frames: 8, label: 'סגור' },
+            open: { frames: 9, label: 'פתוח' }
+        },
+        defaultView: 'closed'
+    },
+    'minis-box-container': {
+        name: 'Minis Box Container',
+        nameHe: 'קופסא למיכל',
+        views: {
+            closed: { frames: 5, label: 'סגור' },
+            open: { frames: 6, label: 'פתוח' }
+        },
+        defaultView: 'closed'
     }
         // Add more products here as needed:
         // 'product-id': {
