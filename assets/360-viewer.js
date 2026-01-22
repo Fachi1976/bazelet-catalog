@@ -81,6 +81,15 @@
             open: { frames: 7, label: 'פתוח' }
         },
         defaultView: 'closed'
+    },
+    'combo-preroll-oil-box': {
+        name: 'Combo Preroll Oil Box',
+        nameHe: 'קופסת מגולגלות + קופסת שמן + מארז חיצוני',
+        views: {
+            closed: { frames: 8, label: 'סגור' },
+            open: { frames: 9, label: 'פתוח' }
+        },
+        defaultView: 'closed'
     }
         // Add more products here as needed:
         // 'product-id': {
