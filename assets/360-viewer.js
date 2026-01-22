@@ -72,6 +72,15 @@
             open: { frames: 6, label: 'פתוח' }
         },
         defaultView: 'closed'
+    },
+    'combo-preroll-flower-box': {
+        name: 'Combo Preroll Flower Box',
+        nameHe: 'קופסא למוצר משולב מגולגלות ותפרחת',
+        views: {
+            closed: { frames: 6, label: 'סגור' },
+            open: { frames: 7, label: 'פתוח' }
+        },
+        defaultView: 'closed'
     }
         // Add more products here as needed:
         // 'product-id': {
