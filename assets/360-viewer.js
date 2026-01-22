@@ -90,6 +90,24 @@
             open: { frames: 9, label: 'פתוח' }
         },
         defaultView: 'closed'
+    },
+    'combo-flower-minis-vertical': {
+        name: 'Combo Flower Minis Vertical',
+        nameHe: 'קופסא לשני מיכלי תפרחת אחד על השני',
+        views: {
+            closed: { frames: 5, label: 'סגור' },
+            open: { frames: 6, label: 'פתוח' }
+        },
+        defaultView: 'closed'
+    },
+    'combo-flower-minis-horizontal': {
+        name: 'Combo Flower Minis Horizontal',
+        nameHe: 'קופסא לשני מיכלי תפרחת אחד ליד השני',
+        views: {
+            closed: { frames: 6, label: 'סגור' },
+            open: { frames: 5, label: 'פתוח' }
+        },
+        defaultView: 'closed'
     }
         // Add more products here as needed:
         // 'product-id': {
