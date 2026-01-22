@@ -313,3 +313,7 @@
         font-size: 1rem;
     }
 }
+/* Hide quote button */
+a[href^="mailto:cmo@b-group.co.il"] {
+    display: none !important;
+}
