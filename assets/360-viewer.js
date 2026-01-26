@@ -460,8 +460,10 @@ function injectButtons() {
             allCards.forEach(card => {
                 if (card.querySelector('.btn-360-view')) return;
                 
-              const productName = card.querySelector('.product-description');
-                if (productName && productName.textContent.includes(product.nameHe)) {
+             const productDescription = card.querySelector('.product-description');
+                const productTitle = card.querySelector('.product-name');
+                const searchText = product.searchInName ? productTitle : productDescription;
+                if (searchText && searchText.textContent.includes(product.nameHe)) {
                     card.appendChild(create360Button(productId));
                 }
             });
