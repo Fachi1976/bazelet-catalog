@@ -64,9 +64,10 @@
         },
         defaultView: 'closed'
     },
-    'minis-box-container': {
-        name: 'Minis Box Container',
-        nameHe: 'קופסא למיכל',
+   'minis-box-container': {
+    name: 'Minis Box Container',
+    nameHe: 'קופסא למיכל',
+    searchInName: true,
         views: {
             closed: { frames: 5, label: 'סגור' },
             open: { frames: 6, label: 'פתוח' }
