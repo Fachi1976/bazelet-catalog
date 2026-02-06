@@ -273,6 +273,9 @@ function App() {
           {/* Info Section */}
           <div className="product-detail-info">
             <h1 className="product-detail-title">{currentProduct.name}</h1>
+            {currentProduct.sku && (
+              <span className="product-sku">מק״ט: {currentProduct.sku}</span>
+            )}
             <p className="product-detail-description">{currentProduct.description}</p>
 
             {/* Tags */}
