@@ -9,7 +9,7 @@
 const generateGallery = (folderName, count) => {
   return Array.from({ length: count }, (_, i) => {
     const num = String(i + 1).padStart(2, '0');
-    return `./images/products/${folderName}/${folderName}-${num}.png`;
+    return `./images/360/${folderName}/${folderName}-${num}.png`;
   });
 };
 
@@ -21,25 +21,25 @@ export const mainCategories = [
     id: 'flowers',
     name: 'תפרחות',
     description: 'פתרונות אריזה לתפרחות קנאביס',
-    icon: './images/icons/flower-icon.png'
+    icon: './images/icons/flower-main-icon.png'
   },
   {
     id: 'prerolls',
     name: 'מגולגלות',
     description: 'פתרונות אריזה למגולגלות קנאביס',
-    icon: './images/icons/preroll-icon.png'
+    icon: './images/icons/preroll-main-icon.png'
   },
   {
     id: 'oil',
     name: 'שמן',
     description: 'פתרונות אריזה לשמני קנאביס',
-    icon: './images/icons/oil-icon.png'
+    icon: './images/icons/oil-main-icon.png'
   },
   {
     id: 'combo',
     name: 'מוצרים משולבים',
     description: 'מארזים משולבים למגוון מוצרי קנאביס',
-    icon: './images/icons/combo-icon.png'
+    icon: './images/icons/combo-main-icon.png'
   }
 ];
 
@@ -692,4 +692,3 @@ export const getAllProducts = () =>
       mainCategoryName: main?.name
     };
   });
-
