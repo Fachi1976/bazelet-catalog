@@ -1,701 +1,424 @@
-/* =====================================================
-   BAZELET CATALOG - CSS
-   ===================================================== */
-
-/* Reset & Base */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --primary: #2d5a3d;
-  --primary-light: #3d7a53;
-  --primary-dark: #1d3a2d;
-  --accent: #e8a838;
-  --accent-dark: #d49530;
-  --bg: #f5f5f5;
-  --bg-card: #ffffff;
-  --text: #333333;
-  --text-light: #666666;
-  --text-muted: #999999;
-  --border: #e0e0e0;
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --radius: 12px;
-  --radius-sm: 8px;
-  --transition: 0.2s ease;
-}
-
-body {
-  font-family: 'Heebo', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  direction: rtl;
-  -webkit-font-smoothing: antialiased;
-}
-
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* =====================================================
-   HEADER
-   ===================================================== */
-.header {
-  background: var(--primary);
-  color: white;
-  padding: 16px 24px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.header-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  background: white;
-  color: var(--primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.logo-title {
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.5px;
-}
-
-.logo-subtitle {
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-.header-badge {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-/* =====================================================
-   BREADCRUMB
-   ===================================================== */
-.breadcrumb {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 12px 24px;
-  font-size: 14px;
-  color: var(--text-light);
-}
-
-.breadcrumb-link {
-  cursor: pointer;
-  color: var(--primary);
-  transition: color var(--transition);
-}
-
-.breadcrumb-link:hover {
-  color: var(--primary-light);
-  text-decoration: underline;
-}
-
-.breadcrumb-separator {
-  margin: 0 8px;
-  color: var(--text-muted);
-}
-
-.breadcrumb-current {
-  color: var(--text);
-  font-weight: 500;
-}
-
-/* =====================================================
-   BACK BUTTON
-   ===================================================== */
-.back-bar {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.back-button {
-  background: none;
-  border: 1px solid var(--border);
-  padding: 8px 20px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-family: 'Heebo', sans-serif;
-  font-size: 14px;
-  color: var(--text-light);
-  transition: all var(--transition);
-}
-
-.back-button:hover {
-  background: var(--bg-card);
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-/* =====================================================
-   MAIN CONTENT
-   ===================================================== */
-.main {
-  flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
-  width: 100%;
-}
-
-.page-container {
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.page-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--primary-dark);
-  margin-bottom: 8px;
-}
-
-.page-subtitle {
-  font-size: 16px;
-  color: var(--text-light);
-  margin-bottom: 32px;
-}
-
-/* =====================================================
-   CATEGORIES GRID
-   ===================================================== */
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
-}
-
-.category-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 32px 24px;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: all var(--transition);
-  border: 2px solid transparent;
-}
-
-.category-card:hover {
-  box-shadow: var(--shadow-hover);
-  border-color: var(--primary-light);
-  transform: translateY(-2px);
-}
-
-.category-icon-wrapper {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.category-icon-img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.category-name {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--primary-dark);
-  margin-bottom: 8px;
-}
-
-.category-description {
-  font-size: 14px;
-  color: var(--text-light);
-  margin-bottom: 12px;
-  line-height: 1.5;
-}
-
-.category-count {
-  display: inline-block;
-  background: var(--primary);
-  color: white;
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-/* =====================================================
-   PRODUCTS GRID
-   ===================================================== */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.product-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: all var(--transition);
-  border: 2px solid transparent;
-  position: relative;
-}
-
-.product-card:hover {
-  box-shadow: var(--shadow-hover);
-  border-color: var(--primary-light);
-  transform: translateY(-2px);
-}
-
-.internal-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: var(--accent);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.product-card-image {
-  width: 100%;
-  height: 180px;
-  object-fit: contain;
-  margin-bottom: 12px;
-}
-
-.product-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-
-.product-description {
-  font-size: 13px;
-  color: var(--text-light);
-  line-height: 1.4;
-  margin-bottom: 8px;
-}
-
-.gallery-badge {
-  display: inline-block;
-  background: var(--bg);
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* =====================================================
-   PRODUCT DETAIL
-   ===================================================== */
-.product-detail {
-  animation: fadeIn 0.3s ease;
-}
-
-.product-detail-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.product-detail-image-section {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow);
-}
-
-.product-detail-info {
-  padding: 16px 0;
-}
-
-.product-detail-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--primary-dark);
-  margin-bottom: 12px;
-}
-
-.product-detail-description {
-  font-size: 16px;
-  color: var(--text-light);
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-/* =====================================================
-   STATE TOGGLE (closed/open)
-   ===================================================== */
-.state-toggle {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-bottom: 16px;
-  background: var(--bg);
-  border-radius: var(--radius-sm);
-  padding: 4px;
-}
-
-.toggle-btn {
-  flex: 1;
-  padding: 10px 24px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'Heebo', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  background: transparent;
-  color: var(--text-light);
-  transition: all var(--transition);
-}
-
-.toggle-btn.active {
-  background: var(--primary);
-  color: white;
-  box-shadow: 0 2px 4px rgba(45, 90, 61, 0.3);
-}
-
-.toggle-btn:hover:not(.active) {
-  background: var(--border);
-}
-
-/* =====================================================
-   IMAGE GALLERY
-   ===================================================== */
-.gallery-container {
-  position: relative;
-  user-select: none;
-}
-
-.gallery-image-wrapper {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  background: #fafafa;
-}
-
-.gallery-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transition: opacity 0.3s ease;
-}
-
-.gallery-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  font-size: 24px;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition);
-  z-index: 2;
-}
-
-.gallery-arrow:hover {
-  background: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transform: translateY(-50%) scale(1.05);
-}
-
-.gallery-arrow-right {
-  right: 8px;
-}
-
-.gallery-arrow-left {
-  left: 8px;
-}
-
-.gallery-dots {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 12px;
-}
-
-.gallery-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background: var(--border);
-  cursor: pointer;
-  padding: 0;
-  transition: all var(--transition);
-}
-
-.gallery-dot.active {
-  background: var(--primary);
-  transform: scale(1.3);
-}
-
-.gallery-counter {
-  text-align: center;
-  margin-top: 8px;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-/* Single Image */
-.single-image-wrapper {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fafafa;
-  border-radius: var(--radius-sm);
-}
-
-.single-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-/* =====================================================
-   TAGS
-   ===================================================== */
-.product-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.product-tag {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  color: var(--text-light);
-}
-
-/* =====================================================
-   SPECS TABLE
-   ===================================================== */
-.product-specs {
-  margin-bottom: 32px;
-}
-
-.specs-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--primary-dark);
-  margin-bottom: 12px;
-}
-
-.specs-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.specs-table tr {
-  border-bottom: 1px solid var(--border);
-}
-
-.specs-table td {
-  padding: 12px 0;
-  font-size: 15px;
-}
-
-.spec-label {
-  color: var(--text-light);
-  font-weight: 500;
-  width: 100px;
-}
-
-.spec-value {
-  color: var(--text);
-}
-
-/* =====================================================
-   CTA BUTTON
-   ===================================================== */
-.cta-button {
-  display: inline-block;
-  background: var(--accent);
-  color: white;
-  text-decoration: none;
-  padding: 14px 40px;
-  border-radius: var(--radius-sm);
-  font-family: 'Heebo', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  transition: all var(--transition);
-  box-shadow: 0 2px 8px rgba(232, 168, 56, 0.3);
-}
-
-.cta-button:hover {
-  background: var(--accent-dark);
-  box-shadow: 0 4px 12px rgba(232, 168, 56, 0.4);
-  transform: translateY(-1px);
-}
-
-/* =====================================================
-   FOOTER
-   ===================================================== */
-.footer {
-  background: var(--primary-dark);
-  color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 24px;
-  font-size: 14px;
-  margin-top: 48px;
-}
-
-.footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-.footer p {
-  margin: 4px 0;
-}
-
-/* =====================================================
-   RESPONSIVE
-   ===================================================== */
-@media (max-width: 768px) {
-  .header {
-    padding: 12px 16px;
-  }
-
-  .logo-title {
-    font-size: 16px;
-  }
-
-  .main {
-    padding: 16px;
-  }
-
-  .page-title {
-    font-size: 22px;
-  }
-
-  .categories-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
-  }
-
-  .category-card {
-    padding: 20px 16px;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
-  }
-
-  .product-card {
-    padding: 14px;
-  }
-
-  .product-card-image {
-    height: 130px;
-  }
-
-  .product-detail-content {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .product-detail-title {
-    font-size: 24px;
-  }
-
-  .gallery-arrow {
-    width: 34px;
-    height: 34px;
-    font-size: 20px;
-  }
-
-  .cta-button {
-    display: block;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .categories-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .products-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .breadcrumb {
-    font-size: 12px;
-    padding: 8px 16px;
-  }
-}
-
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  mainCategories,
+  subcategories,
+  products,
+  getMainCategory,
+  getSubcategoriesByParent,
+  getSubcategory,
+  getProductsBySubcategory,
+  getProduct
+} from './data/products.js';
+import './App.css';
+
+// =====================================================
+// IMAGE GALLERY COMPONENT
+// =====================================================
+function ImageGallery({ images, alt }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Reset index when images change
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [images]);
+
+  if (!images || images.length === 0) return null;
+
+  const goNext = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const goPrev = (e) => {
+    e.stopPropagation();
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <div className="gallery-container">
+      <div className="gallery-image-wrapper">
+        <img
+          src={images[currentIndex]}
+          alt={`${alt} - זווית ${currentIndex + 1}`}
+          className="gallery-image"
+          onError={(e) => { e.target.src = './images/placeholder.png'; }}
+        />
+      </div>
+
+      {images.length > 1 && (
+        <>
+          {/* Navigation Arrows */}
+          <button className="gallery-arrow gallery-arrow-right" onClick={goPrev}>‹</button>
+          <button className="gallery-arrow gallery-arrow-left" onClick={goNext}>›</button>
+
+          {/* Dots */}
+          <div className="gallery-dots">
+            {images.map((_, idx) => (
+              <button
+                key={idx}
+                className={`gallery-dot ${idx === currentIndex ? 'active' : ''}`}
+                onClick={(e) => { e.stopPropagation(); setCurrentIndex(idx); }}
+              />
+            ))}
+          </div>
+
+          {/* Counter */}
+          <div className="gallery-counter">
+            {currentIndex + 1} / {images.length}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// =====================================================
+// MAIN APP
+// =====================================================
+function App() {
+  // Navigation state
+  const [currentMainCategory, setCurrentMainCategory] = useState(null);
+  const [currentSubcategory, setCurrentSubcategory] = useState(null);
+  const [currentProduct, setCurrentProduct] = useState(null);
+
+  // Product view state
+  const [viewState, setViewState] = useState('closed');
+
+  // Reset view state when product changes
+  useEffect(() => {
+    setViewState('closed');
+  }, [currentProduct]);
+
+  // Back navigation
+  const handleBack = () => {
+    if (currentProduct) {
+      setCurrentProduct(null);
+    } else if (currentSubcategory) {
+      setCurrentSubcategory(null);
+    } else if (currentMainCategory) {
+      setCurrentMainCategory(null);
+    }
+  };
+
+  // Get current gallery images based on toggle state
+  const getCurrentImages = () => {
+    if (!currentProduct) return [];
+    if (currentProduct.gallery) {
+      return currentProduct.gallery[viewState] || currentProduct.gallery.closed || [];
+    }
+    return [];
+  };
+
+  // Get primary image for product card
+  const getProductCardImage = (product) => {
+    if (product.gallery) {
+      return product.gallery.closed?.[0] || product.gallery.open?.[0] || './images/placeholder.png';
+    }
+    if (product.images?.primary) {
+      return product.images.primary;
+    }
+    return './images/placeholder.png';
+  };
+
+  // ===================================================
+  // RENDER: Main Categories (Level 1)
+  // ===================================================
+  const renderMainCategories = () => (
+    <div className="page-container">
+      <h1 className="page-title">קטלוג אריזות קנאביס</h1>
+      <p className="page-subtitle">בחרו קטגוריה לצפייה במוצרים</p>
+      <div className="categories-grid">
+        {mainCategories.map((cat) => {
+          return (
+            <div
+              key={cat.id}
+              className="category-card"
+              onClick={() => setCurrentMainCategory(cat)}
+            >
+              <div className="category-icon-wrapper">
+                <img src={cat.icon} alt={cat.name} className="category-icon-img"
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+              </div>
+              <h2 className="category-name">{cat.name}</h2>
+              <p className="category-description">{cat.description}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  // ===================================================
+  // RENDER: Subcategories (Level 2)
+  // ===================================================
+  const renderSubcategories = () => {
+    const subs = getSubcategoriesByParent(currentMainCategory.id);
+
+    // If only one subcategory, skip to products
+    if (subs.length === 1) {
+      return renderProducts(subs[0]);
+    }
+
+    return (
+      <div className="page-container">
+        <h1 className="page-title">{currentMainCategory.name}</h1>
+        <div className="categories-grid">
+          {subs.map((sub) => {
+            return (
+              <div
+                key={sub.id}
+                className="category-card"
+                onClick={() => setCurrentSubcategory(sub)}
+              >
+                {sub.icon && (
+                  <div className="category-icon-wrapper">
+                    <img src={sub.icon} alt={sub.name} className="category-icon-img"
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
+                  </div>
+                )}
+                <h2 className="category-name">{sub.name}</h2>
+                <p className="category-description">{sub.description}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  // ===================================================
+  // RENDER: Products List (Level 3)
+  // ===================================================
+  const renderProducts = (sub) => {
+    const activeSub = sub || currentSubcategory;
+    const prods = getProductsBySubcategory(activeSub.id);
+
+    return (
+      <div className="page-container">
+        <h1 className="page-title">{activeSub.name}</h1>
+        <p className="page-subtitle">{activeSub.description}</p>
+        <div className="products-grid">
+          {prods.map((product) => (
+            <div
+              key={product.id}
+              className="product-card"
+              onClick={() => setCurrentProduct(product)}
+            >
+              {product.isInternal && (
+                <span className="internal-badge">רכיב פנימי</span>
+              )}
+              <img
+                src={getProductCardImage(product)}
+                alt={product.name}
+                className="product-card-image"
+                onError={(e) => { e.target.src = './images/placeholder.png'; }}
+              />
+              <h3 className="product-name">{product.name}</h3>
+              <p className="product-description">{product.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  // ===================================================
+  // RENDER: Product Detail
+  // ===================================================
+  const renderProductDetail = () => {
+    const hasGallery = currentProduct.gallery !== null;
+    const hasSingleImage = !hasGallery && currentProduct.images?.primary;
+    const galleryImages = getCurrentImages();
+
+    return (
+      <div className="product-detail">
+        <div className="product-detail-content">
+          {/* Image Section */}
+          <div className="product-detail-image-section">
+            {hasGallery ? (
+              <>
+                {/* Toggle closed/open */}
+                {currentProduct.hasToggle && (
+                  <div className="state-toggle">
+                    <button
+                      className={`toggle-btn ${viewState === 'closed' ? 'active' : ''}`}
+                      onClick={() => setViewState('closed')}
+                    >
+                      סגור
+                    </button>
+                    <button
+                      className={`toggle-btn ${viewState === 'open' ? 'active' : ''}`}
+                      onClick={() => setViewState('open')}
+                    >
+                      פתוח
+                    </button>
+                  </div>
+                )}
+                <ImageGallery images={galleryImages} alt={currentProduct.name} />
+              </>
+            ) : hasSingleImage ? (
+              <div className="single-image-wrapper">
+                <img
+                  src={currentProduct.images.primary}
+                  alt={currentProduct.name}
+                  className="single-image"
+                  onError={(e) => { e.target.src = './images/placeholder.png'; }}
+                />
+              </div>
+            ) : null}
+          </div>
+
+          {/* Info Section */}
+          <div className="product-detail-info">
+            <h1 className="product-detail-title">{currentProduct.name}</h1>
+            <p className="product-detail-description">{currentProduct.description}</p>
+
+            {/* Tags */}
+            {currentProduct.tags && currentProduct.tags.length > 0 && (
+              <div className="product-tags">
+                {currentProduct.tags.map((tag) => (
+                  <span key={tag} className="product-tag">{tag}</span>
+                ))}
+              </div>
+            )}
+
+            {/* Specs */}
+            {currentProduct.specs && (
+              <div className="product-specs">
+                <h3 className="specs-title">מפרט טכני</h3>
+                <table className="specs-table">
+                  <tbody>
+                    {Object.entries(currentProduct.specs).map(([key, value]) => (
+                      <tr key={key}>
+                        <td className="spec-label">
+                          {key === 'volume' ? 'נפח' :
+                           key === 'material' ? 'חומר' :
+                           key === 'closure' ? 'סגירה' : key}
+                        </td>
+                        <td className="spec-value">{value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // ===================================================
+  // BREADCRUMB
+  // ===================================================
+  const renderBreadcrumb = () => {
+    if (!currentMainCategory) return null;
+
+    return (
+      <nav className="breadcrumb">
+        <span className="breadcrumb-link" onClick={() => {
+          setCurrentMainCategory(null);
+          setCurrentSubcategory(null);
+          setCurrentProduct(null);
+        }}>
+          ראשי
+        </span>
+
+        {currentMainCategory && (
+          <>
+            <span className="breadcrumb-separator">/</span>
+            <span
+              className={(currentSubcategory || currentProduct) ? "breadcrumb-link" : "breadcrumb-current"}
+              onClick={() => {
+                setCurrentSubcategory(null);
+                setCurrentProduct(null);
+              }}
+            >
+              {currentMainCategory.name}
+            </span>
+          </>
+        )}
+
+        {currentSubcategory && (
+          <>
+            <span className="breadcrumb-separator">/</span>
+            <span
+              className={currentProduct ? "breadcrumb-link" : "breadcrumb-current"}
+              onClick={() => setCurrentProduct(null)}
+            >
+              {currentSubcategory.name}
+            </span>
+          </>
+        )}
+
+        {currentProduct && (
+          <>
+            <span className="breadcrumb-separator">/</span>
+            <span className="breadcrumb-current">{currentProduct.name}</span>
+          </>
+        )}
+      </nav>
+    );
+  };
+
+  // ===================================================
+  // MAIN RENDER
+  // ===================================================
+  return (
+    <div className="app" dir="rtl">
+      {/* Header */}
+      <header className="header">
+        <div className="header-content">
+          <div className="logo" onClick={() => {
+            setCurrentMainCategory(null);
+            setCurrentSubcategory(null);
+            setCurrentProduct(null);
+          }}>
+            <img src="./images/logo-white.png" alt="Bazelet Group" className="logo-img" />
+            <div className="logo-text">
+              <span className="logo-title">Bazelet Group</span>
+              <span className="logo-subtitle">קטלוג אריזות</span>
+            </div>
+          </div>
+          <div className="header-badge">IMC-GMP ✓</div>
+        </div>
+      </header>
+
+      {/* Breadcrumb */}
+      {renderBreadcrumb()}
+
+      {/* Back Button */}
+      {currentMainCategory && (
+        <div className="back-bar">
+          <button className="back-button" onClick={handleBack}>
+            → חזרה
+          </button>
+        </div>
+      )}
+
+      {/* Main Content */}
+      <main className="main">
+        {!currentMainCategory
+          ? renderMainCategories()
+          : currentProduct
+            ? renderProductDetail()
+            : currentSubcategory
+              ? renderProducts()
+              : renderSubcategories()
+        }
+      </main>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>© 2025 Bazelet Group | IMC-GMP Certified Cannabis Manufacturer</p>
+        <p>
+          <a href="mailto:sales@bazelet.co.il">sales@bazelet.co.il</a>
+        </p>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
