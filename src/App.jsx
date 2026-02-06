@@ -377,10 +377,7 @@ function App() {
             setCurrentProduct(null);
           }}>
             <img src="./images/logo-white.png" alt="Bazelet Group" className="logo-img" />
-            <div className="logo-text">
-              <span className="logo-title">Bazelet Group</span>
-              <span className="logo-subtitle">קטלוג אריזות</span>
-            </div>
+            <span className="logo-catalog-title">קטלוג אריזות</span>
           </div>
           <div className="header-badge">IMC-GMP ✓</div>
         </div>
@@ -413,9 +410,6 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <p>© 2025 Bazelet Group | IMC-GMP Certified Cannabis Manufacturer</p>
-        <p>
-          <a href="mailto:sales@bazelet.co.il">sales@bazelet.co.il</a>
-        </p>
       </footer>
     </div>
   );
