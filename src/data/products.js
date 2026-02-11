@@ -178,7 +178,7 @@ export const products = [
     hasToggle: false,
     isInternal: true,
     gallery: null,
-    images: { primary: './images/products/placeholder.png' }
+    images: { primary: './images/products/flower-pouch-present.png' }
   },
 
   // =============================================================
@@ -217,7 +217,7 @@ export const products = [
     images: { primary: './images/products/minis-pouch.png' }
   },
 
-  // אריזת מתנה מוקטנת לשקית DOY (NEW - BZL-FL-006)
+  // אריזת מתנה מוקטנת לשקית DOY (BZL-FL-006)
   {
     id: 'flower-small-gift',
     sku: 'BZL-FL-006',
@@ -226,10 +226,12 @@ export const products = [
     description: 'קרטון מוקטן פתיחת מתנה לשקית DOY עם תחתית',
     specs: { volume: '10 גרם', material: 'קרטון', closure: 'פתיחת מתנה' },
     tags: ['IMC-GMP'],
-    hasToggle: false,
+    hasToggle: true,
     isInternal: false,
-    gallery: null,
-    images: { primary: './images/products/placeholder.png' }
+    gallery: {
+      closed: generateGallery('flower-box-downsized-premium-closed', 7),
+      open: generateGallery('flower-box-downsized-premium-open', 6)
+    }
   },
 
   // =============================================================
@@ -364,7 +366,7 @@ export const products = [
     hasToggle: false,
     isInternal: true,
     gallery: null,
-    images: { primary: './images/products/placeholder.png' }
+    images: { primary: './images/products/0.5-preroll-cone.png' }
   },
 
   // =============================================================
@@ -415,7 +417,7 @@ export const products = [
     hasToggle: false,
     isInternal: true,
     gallery: null,
-    images: { primary: './images/products/placeholder.png' }
+    images: { primary: './images/products/0.25-preroll-cone.png' }
   },
 
   // =============================================================
@@ -667,5 +669,4 @@ export const products = [
 export const getMainCategory = (id) => mainCategories.find(c => c.id === id);
 export const getSubcategoriesByParent = (parentId) => subcategories.filter(s => s.parentId === parentId);
 export const getSubcategory = (id) => subcategories.find(s => s.id === id);
-export const getProductsBySubcategory = (subcategoryId) => products.filter(p => p.subcategoryId === subcategoryId);
-export const getProduct = (id) => products.find(p => p.id === id);
+export const getProductsBySubcategory = (subcategoryId) => products.filter(p => p.subcat
