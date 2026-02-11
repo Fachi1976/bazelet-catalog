@@ -171,8 +171,8 @@ export const products = [
     id: 'flower-gift-pouch',
     sku: 'BZL-FL-007',
     subcategoryId: 'flowers-regular',
-    name: 'שקית לאריזת מתנה - הדפסה אופקית',
-    description: 'שקית אלומיניום לאריזת מתנה',
+    name: 'שקית לאריזת מתנה',
+    description: 'שקית אלומיניום לאריזת מתנה-הדפסה אופקית',
     specs: { volume: '10 גרם', material: 'אלומיניום', closure: 'סגירה חוזרת' },
     tags: ['IMC-GMP'],
     hasToggle: false,
@@ -208,7 +208,7 @@ export const products = [
     sku: 'BZL-FL-005',
     subcategoryId: 'flowers-regular',
     name: 'שקית DOY עם תחתית',
-    description: 'שקית Doy עם תחתית',
+    description: 'שקית DOY עם תחתית',
     specs: { volume: '10 גרם', material: 'אלומיניום', closure: 'סגירה חוזרת' },
     tags: ['IMC-GMP'],
     hasToggle: false,
@@ -241,7 +241,7 @@ export const products = [
   // אריזה (קופסא → אריזה, with מיכל inside)
   {
     id: 'minis-box-container',
-    sku: 'BZL-MN-002',
+    sku: 'BZL-MN-001',
     subcategoryId: 'flowers-minis',
     name: 'אריזה',
     description: 'אריזה עם מיכל פנימי לתפרחות מיניז',
@@ -255,10 +255,10 @@ export const products = [
     }
   },
 
-  // מיכל תפרחת מיניז (SKU BZL-MN-004→BZL-MN-001)
+  // מיכל תפרחת מיניז (SKU BZL-MN-002)
   {
     id: 'minis-container',
-    sku: 'BZL-MN-001',
+    sku: 'BZL-MN-002',
     subcategoryId: 'flowers-minis',
     name: 'מיכל תפרחת מיניז',
     description: 'מיכל לתפרחות מיניז',
@@ -361,7 +361,7 @@ export const products = [
     subcategoryId: 'prerolls-05',
     name: 'קונוס 0.5 גרם',
     description: 'קונוס למגולגלת 0.5 גרם',
-    specs: { volume: '0.5 גרם', material: 'נייר', closure: 'פתוח' },
+    specs: { volume: '0.5 גרם', material: 'נייר+פילטר', closure: 'סגירה לאחר מילוי' },
     tags: ['IMC-GMP'],
     hasToggle: false,
     isInternal: true,
@@ -412,7 +412,7 @@ export const products = [
     subcategoryId: 'prerolls-025',
     name: 'קונוס 0.25 גרם',
     description: 'קונוס למגולגלת 0.25 גרם',
-    specs: { volume: '0.25 גרם', material: 'נייר', closure: 'פתוח' },
+    specs: { volume: '0.25 גרם', material: 'נייר+פילטר', closure: 'סגירה לאחר מילוי' },
     tags: ['IMC-GMP'],
     hasToggle: false,
     isInternal: true,
@@ -669,4 +669,5 @@ export const products = [
 export const getMainCategory = (id) => mainCategories.find(c => c.id === id);
 export const getSubcategoriesByParent = (parentId) => subcategories.filter(s => s.parentId === parentId);
 export const getSubcategory = (id) => subcategories.find(s => s.id === id);
-export const getProductsBySubcategory = (subcategoryId) => products.filter(p => p.subcat
+export const getProductsBySubcategory = (subcategoryId) => products.filter(p => p.subcategoryId === subcategoryId);
+export const getProduct = (id) => products.find(p => p.id === id);
