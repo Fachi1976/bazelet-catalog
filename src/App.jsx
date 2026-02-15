@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  mainCategories,
-  subcategories,
-  products,
-  getMainCategory,
-  getSubcategoriesByParent,
-  getSubcategory,
-  getProductsBySubcategory,
-  getProduct
-} from './data/products.js';
+import { mainCategories, subcategories, products, getMainCategory, getSubcategoriesByParent, getSubcategory, getProductsBySubcategory, getProduct } from './data/products.js';
 import './App.css';
 
 // =====================================================
@@ -44,7 +35,6 @@ function ImageGallery({ images, alt }) {
           onError={(e) => { e.target.src = './images/placeholder.png'; }}
         />
       </div>
-
       {images.length > 1 && (
         <>
           {/* Navigation Arrows */}
@@ -111,11 +101,11 @@ function App() {
 
   // Get primary image for product card
   const getProductCardImage = (product) => {
-    if (product.gallery) {
-      return product.gallery.closed?.[0] || product.gallery.open?.[0] || './images/placeholder.png';
-    }
     if (product.images?.primary) {
       return product.images.primary;
+    }
+    if (product.gallery) {
+      return product.gallery.closed?.[0] || product.gallery.open?.[0] || './images/placeholder.png';
     }
     return './images/placeholder.png';
   };
@@ -127,6 +117,7 @@ function App() {
     <div className="page-container">
       <h1 className="page-title">קטלוג אריזות קנאביס</h1>
       <p className="page-subtitle">בחרו קטגוריה לצפייה במוצרים</p>
+
       <div className="categories-grid">
         {mainCategories.map((cat) => {
           return (
@@ -136,7 +127,10 @@ function App() {
               onClick={() => setCurrentMainCategory(cat)}
             >
               <div className="category-icon-wrapper">
-                <img src={cat.icon} alt={cat.name} className="category-icon-img"
+                <img
+                  src={cat.icon}
+                  alt={cat.name}
+                  className="category-icon-img"
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
               </div>
@@ -173,7 +167,10 @@ function App() {
               >
                 {sub.icon && (
                   <div className="category-icon-wrapper">
-                    <img src={sub.icon} alt={sub.name} className="category-icon-img"
+                    <img
+                      src={sub.icon}
+                      alt={sub.name}
+                      className="category-icon-img"
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
                   </div>
@@ -199,6 +196,7 @@ function App() {
       <div className="page-container">
         <h1 className="page-title">{activeSub.name}</h1>
         <p className="page-subtitle">{activeSub.description}</p>
+
         <div className="products-grid">
           {prods.map((product) => (
             <div
@@ -273,9 +271,11 @@ function App() {
           {/* Info Section */}
           <div className="product-detail-info">
             <h1 className="product-detail-title">{currentProduct.name}</h1>
+
             {currentProduct.sku && (
               <span className="product-sku">מק״ט: {currentProduct.sku}</span>
             )}
+
             <p className="product-detail-description">{currentProduct.description}</p>
 
             {/* Tags */}
@@ -296,9 +296,7 @@ function App() {
                     {Object.entries(currentProduct.specs).map(([key, value]) => (
                       <tr key={key}>
                         <td className="spec-label">
-                          {key === 'volume' ? 'נפח' :
-                           key === 'material' ? 'חומר' :
-                           key === 'closure' ? 'סגירה' : key}
+                          {key === 'volume' ? 'נפח' : key === 'material' ? 'חומר' : key === 'closure' ? 'סגירה' : key}
                         </td>
                         <td className="spec-value">{value}</td>
                       </tr>
@@ -321,11 +319,13 @@ function App() {
 
     return (
       <nav className="breadcrumb">
-        <span className="breadcrumb-link" onClick={() => {
-          setCurrentMainCategory(null);
-          setCurrentSubcategory(null);
-          setCurrentProduct(null);
-        }}>
+        <span
+          className="breadcrumb-link"
+          onClick={() => {
+            setCurrentMainCategory(null);
+            setCurrentSubcategory(null);
+            setCurrentProduct(null);
+          }}>
           ראשי
         </span>
 
@@ -403,10 +403,10 @@ function App() {
         {!currentMainCategory
           ? renderMainCategories()
           : currentProduct
-            ? renderProductDetail()
-            : currentSubcategory
-              ? renderProducts()
-              : renderSubcategories()
+          ? renderProductDetail()
+          : currentSubcategory
+          ? renderProducts()
+          : renderSubcategories()
         }
       </main>
 
