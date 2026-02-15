@@ -127,7 +127,8 @@ export const products = [
     gallery: {
       closed: generateGallery('flower-standard-closed', 6),
       open: generateGallery('flower-standard-open', 6)
-    }
+    },
+    images: { primary: './images/products/flower-box-standard-closed.png' }
   },
 
   // שקית סטנדרטית (שקית → שקית סטנדרטית, SKU BZL-FL-002→003)
@@ -163,7 +164,8 @@ export const products = [
     gallery: {
       closed: generateGallery('flower-gift-closed', 7),
       open: generateGallery('flower-gift-open', 6)
-    }
+    },
+    images: { primary: './images/products/flower-box-premium-closed.png' }
   },
 
   // שקית לאריזת מתנה - הדפסה אופקית (NEW - BZL-FL-007)
@@ -199,7 +201,8 @@ export const products = [
     gallery: {
       closed: generateGallery('minis-box-bag-closed', 8),
       open: generateGallery('minis-box-bag-open', 9)
-    }
+    },
+    images: { primary: './images/products/minis-pouch-box-closed.png' }
   },
 
   // שקית DOY עם תחתית (שקית מיניז → הועבר לתפרחות, SKU BZL-MN-003→BZL-FL-005)
@@ -231,7 +234,8 @@ export const products = [
     gallery: {
       closed: generateGallery('flower-box-downsized-premium-closed', 7),
       open: generateGallery('flower-box-downsized-premium-open', 6)
-    }
+    },
+    images: { primary: './images/products/flower-box-downsized-premium-closed.png' }
   },
 
   // =============================================================
@@ -252,7 +256,8 @@ export const products = [
     gallery: {
       closed: generateGallery('minis-box-container-closed', 5),
       open: generateGallery('minis-box-container-open', 6)
-    }
+    },
+    images: { primary: './images/products/minis-container-box-closed.png' }
   },
 
   // מיכל תפרחת מיניז (SKU BZL-MN-002)
@@ -319,7 +324,8 @@ export const products = [
     gallery: {
       closed: generateGallery('preroll-slims-standard-closed', 8),
       open: generateGallery('preroll-slims-standard-open', 8)
-    }
+    },
+    images: { primary: './images/products/preroll-slims-closed.png' }
   },
 
   // אריזת מתנה (קופסת מתנה → אריזת מתנה)
@@ -336,7 +342,8 @@ export const products = [
     gallery: {
       closed: generateGallery('preroll-slims-gift-closed', 6),
       open: generateGallery('preroll-slims-gift-open', 8)
-    }
+    },
+    images: { primary: './images/products/preroll-slims-gift-closed.png' }
   },
 
   // תרמיל בודד
@@ -387,7 +394,8 @@ export const products = [
     gallery: {
       closed: generateGallery('preroll-shorts-box-closed', 9),
       open: generateGallery('preroll-shorts-box-open', 8)
-    }
+    },
+    images: { primary: './images/products/preroll-shorts-closed.png' }
   },
 
   // מגש
@@ -466,7 +474,7 @@ export const products = [
     hasToggle: false,
     isInternal: true,
     gallery: null,
-    images: { primary: './images/products/combo-inner-container.png' }
+    images: { primary: './images/products/combo-flower-container.png' }
   },
   {
     id: 'combo-preroll-flower-tray',
@@ -494,7 +502,8 @@ export const products = [
     gallery: {
       closed: generateGallery('combo-preroll-flower-box-closed', 6),
       open: generateGallery('combo-preroll-flower-box-open', 7)
-    }
+    },
+    images: { primary: './images/products/combo-preroll-flower-closed.png' }
   },
 
   // =============================================================
@@ -558,7 +567,8 @@ export const products = [
     gallery: {
       closed: generateGallery('combo-preroll-oil-box-closed', 8),
       open: generateGallery('combo-preroll-oil-box-open', 8)
-    }
+    },
+    images: { primary: './images/products/combo-preroll-oil-open.png' }
   },
 
   // =============================================================
@@ -576,7 +586,7 @@ export const products = [
     hasToggle: false,
     isInternal: true,
     gallery: null,
-    images: { primary: './images/products/combo-inner-container.png' }
+    images: { primary: './images/products/combo-flower-container.png' }
   },
 
   // קופסא אופקית → אריזה אופקית
@@ -593,7 +603,8 @@ export const products = [
     gallery: {
       closed: generateGallery('combo-flower-minis-horizontal-closed', 6),
       open: generateGallery('combo-flower-minis-horizontal-open', 5)
-    }
+    },
+    images: { primary: './images/products/combo-dual-flower-horizontal-closed.png' }
   },
 
   // קופסא אנכית → אריזה אנכית
@@ -610,7 +621,8 @@ export const products = [
     gallery: {
       closed: generateGallery('combo-flower-minis-vertical-closed', 5),
       open: generateGallery('combo-flower-minis-vertical-open', 6)
-    }
+    },
+    images: { primary: './images/products/combo-dual-flower-vertical-closed.png' }
   },
 
   // =============================================================
@@ -628,7 +640,7 @@ export const products = [
     hasToggle: false,
     isInternal: true,
     gallery: null,
-    images: { primary: './images/products/combo-inner-container.png' }
+    images: { primary: './images/products/combo-flower-container.png' }
   },
 
   // קופסא אנכית → אריזה אנכית
