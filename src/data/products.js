@@ -657,7 +657,8 @@ export const products = [
     gallery: {
       closed: generateGallery('combo-sativa-indica-vertical-closed', 5),
       open: generateGallery('combo-sativa-indica-vertical-open', 5)
-    }
+    },
+    images: { primary: './images/products/combo-sativa-indica-vertical-closed.png' }
   },
 
   // קופסא אופקית → אריזה אופקית
@@ -674,7 +675,8 @@ export const products = [
     gallery: {
       closed: generateGallery('combo-sativa-indica-horizontal-closed', 5),
       open: generateGallery('combo-sativa-indica-horizontal-open', 5)
-    }
+    },
+    images: { primary: './images/products/combo-sativa-indica-horizontal-closed.png' }
   }
 ];
 
