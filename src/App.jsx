@@ -118,7 +118,7 @@ function App() {
       <h1 className="page-title">קטלוג אריזות קנאביס</h1>
       <p className="page-subtitle">בחרו קטגוריה לצפייה במוצרים</p>
 
-      <div className="categories-grid">
+      <div className="categories-grid main-categories-grid">
         {mainCategories.map((cat) => {
           return (
             <div
@@ -205,7 +205,7 @@ function App() {
               onClick={() => setCurrentProduct(product)}
             >
               {product.isInternal && (
-                <span className="internal-badge">רכיב פנימי</span>
+                <span className="internal-badge">רכיב פנימי (אריזה ראשונית)</span>
               )}
               <img
                 src={getProductCardImage(product)}
