@@ -220,9 +220,34 @@ body {
 }
 
 .main-categories-grid {
-  max-width: 66%;
+  max-width: 95%;
   margin: 0 auto;
   grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.main-categories-grid .category-card {
+  padding: 50px 32px;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-categories-grid .category-icon-wrapper {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 24px;
+}
+
+.main-categories-grid .category-name {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.main-categories-grid .category-description {
+  font-size: 17px;
 }
 
 .category-card {
