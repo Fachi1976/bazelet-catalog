@@ -219,6 +219,12 @@ body {
   gap: 20px;
 }
 
+.main-categories-grid {
+  max-width: 66%;
+  margin: 0 auto;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .category-card {
   background: var(--bg-card);
   border-radius: var(--radius);
@@ -665,6 +671,11 @@ body {
   .categories-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 12px;
+  }
+
+  .main-categories-grid {
+    max-width: 100%;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .category-card {
