@@ -341,7 +341,7 @@ export const products = [
     isInternal: false,
     gallery: {
       closed: generateGallery('preroll-slims-gift-closed', 6),
-      open: generateGallery('preroll-slims-gift-open', 8)
+      open: generateGallery('preroll-slims-gift-open', 6)
     },
     images: { primary: './images/products/preroll-slims-gift-closed.png' }
   },
@@ -656,7 +656,7 @@ export const products = [
     isInternal: false,
     gallery: {
       closed: generateGallery('combo-sativa-indica-vertical-closed', 5),
-      open: generateGallery('combo-sativa-indica-vertical-open', 5)
+      open: generateGallery('combo-sativa-indica-vertical-open', 6)
     },
     images: { primary: './images/products/combo-sativa-indica-vertical-closed.png' }
   },
@@ -673,7 +673,7 @@ export const products = [
     hasToggle: true,
     isInternal: false,
     gallery: {
-      closed: generateGallery('combo-sativa-indica-horizontal-closed', 5),
+      closed: generateGallery('combo-sativa-indica-horizontal-closed', 6),
       open: generateGallery('combo-sativa-indica-horizontal-open', 5)
     },
     images: { primary: './images/products/combo-sativa-indica-horizontal-closed.png' }
