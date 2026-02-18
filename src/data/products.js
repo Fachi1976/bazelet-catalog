@@ -491,7 +491,7 @@ export const products = [
   },
   {
     id: 'combo-preroll-flower-box',
-    sku: 'BZL-CB-PF-001',
+    sku: 'BZL-CB-001',
     subcategoryId: 'combo-preroll-flower',
     name: 'אריזה',
     description: 'קופסא למוצר משולב מגולגלות ותפרחת',
@@ -592,7 +592,7 @@ export const products = [
   // קופסא אופקית → אריזה אופקית
   {
     id: 'combo-flower-minis-horizontal',
-    sku: 'BZL-CB-FM-002',
+    sku: 'BZL-CB-001',
     subcategoryId: 'combo-flower-minis',
     name: 'קופסא אופקית',
     description: 'קופסא לשני מיכלי תפרחת אחד ליד השני',
@@ -610,7 +610,7 @@ export const products = [
   // קופסא אנכית → אריזה אנכית
   {
     id: 'combo-flower-minis-vertical',
-    sku: 'BZL-CB-FM-001',
+    sku: 'BZL-CB-002',
     subcategoryId: 'combo-flower-minis',
     name: 'קופסא אנכית',
     description: 'קופסא לשני מיכלי תפרחת אחד על השני',
@@ -646,7 +646,7 @@ export const products = [
   // קופסא אנכית → אריזה אנכית
   {
     id: 'combo-sativa-indica-vertical',
-    sku: 'BZL-CB-SI-001',
+    sku: 'BZL-CB-002',
     subcategoryId: 'combo-sativa-indica',
     name: 'קופסא אנכית',
     description: 'קופסא לשני מיכלי תפרחת אחד על השני',
@@ -664,7 +664,7 @@ export const products = [
   // קופסא אופקית → אריזה אופקית
   {
     id: 'combo-sativa-indica-horizontal',
-    sku: 'BZL-CB-SI-002',
+    sku: 'BZL-CB-001',
     subcategoryId: 'combo-sativa-indica',
     name: 'קופסא אופקית',
     description: 'קופסא לשני מיכלי תפרחת אחד ליד השני',
