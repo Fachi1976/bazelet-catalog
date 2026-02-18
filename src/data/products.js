@@ -387,7 +387,7 @@ export const products = [
     subcategoryId: 'prerolls-025',
     name: 'אריזה',
     description: 'אריזה ל-4 מגשים',
-    specs: { volume: '0.25 גרם × 40', material: 'קרטון', closure: 'מגירה נשלפת' },
+    specs: { volume: '0.25 גרם × 40', material: 'קרטון', closure: 'קרטון+מגירה נשלפת' },
     tags: ['IMC-GMP'],
     hasToggle: true,
     isInternal: false,
