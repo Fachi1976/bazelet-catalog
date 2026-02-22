@@ -285,7 +285,7 @@ export const products = [
     subcategoryId: 'jar',
     name: 'צנצנת',
     description: 'צנצנת לתפרחות',
-    specs: { volume: '10 גרם', material: 'פלסטיק', closure: 'מכסה בורג' , dimensions: '95.5 × 69.6 מ"מ'},
+    specs: { volume: '10 גרם', material: 'פלסטיק', closure: 'מכסה בהברגה' , dimensions: '95.5 × 69.6 מ"מ'},
     tags: ['child-resistant', 'IMC-GMP'],
     hasToggle: false,
     isInternal: true,
@@ -353,7 +353,7 @@ export const products = [
     subcategoryId: 'prerolls-05',
     name: 'תרמיל בודד',
     description: 'תרמיל ל-2 יחידות מגולגלות 0.5 גרם',
-    specs: { volume: '0.5 גרם × 2', material: 'פלסטיק', closure: 'מכסה child-proof' , dimensions: '20 × 115 מ"מ'},
+    specs: { volume: '0.5 גרם × 2', material: 'פלסטיק', closure: 'סגירה חוזרת, child-proof' , dimensions: '20 × 115 מ"מ'},
     tags: ['IMC-GMP'],
     hasToggle: false,
     isInternal: true,
@@ -405,7 +405,7 @@ export const products = [
     subcategoryId: 'prerolls-025',
     name: 'מגש',
     description: 'מגש ל-10 יחידות 0.25 גרם',
-    specs: { volume: '0.25 גרם × 10', material: 'פלסטיק + כיסוי אלומיניום', closure: 'כיסוי עליון' , dimensions: '81 × 10 מ"מ'},
+    specs: { volume: '0.25 גרם × 10', material: 'פלסטיק + כיסוי אלומיניום', closure: 'פתיחה עליונה' , dimensions: '81 × 10 מ"מ'},
     tags: ['IMC-GMP'],
     hasToggle: false,
     isInternal: true,
@@ -482,7 +482,7 @@ export const products = [
     subcategoryId: 'combo-preroll-flower',
     name: 'מגשית מגולגלות',
     description: 'מגשית ל-20 מגולגלות 0.25 גרם',
-    specs: { volume: '0.25 גרם × 10', material: 'פלסטיק + כיסוי אלומיניום', closure: 'כיסוי עליון' , dimensions: '81 × 10 מ"מ'},
+    specs: { volume: '0.25 גרם × 10', material: 'פלסטיק + כיסוי אלומיניום', closure: 'פתיחה עליונה' , dimensions: '81 × 10 מ"מ'},
     tags: ['IMC-GMP'],
     hasToggle: false,
     isInternal: true,
@@ -546,7 +546,7 @@ export const products = [
     subcategoryId: 'combo-preroll-oil',
     name: 'מגשית מגולגלות',
     description: 'מגשית ל-10 מגולגלות 0.25 גרם',
-    specs: { volume: '0.25 גרם × 10', material: 'פלסטיק + כיסוי אלומיניום', closure: 'כיסוי עליון' , dimensions: '81 × 10 מ"מ'},
+    specs: { volume: '0.25 גרם × 10', material: 'פלסטיק + כיסוי אלומיניום', closure: 'פתיחה עליונה' , dimensions: '81 × 10 מ"מ'},
     tags: ['IMC-GMP'],
     hasToggle: false,
     isInternal: true,
@@ -643,24 +643,6 @@ export const products = [
     images: { primary: './images/products/combo-flower-container.png' }
   },
 
-  // קופסא אנכית → אריזה אנכית
-  {
-    id: 'combo-sativa-indica-vertical',
-    sku: 'BZL-CB-002',
-    subcategoryId: 'combo-sativa-indica',
-    name: 'קופסא אנכית',
-    description: 'קופסא לשני מיכלי תפרחת אחד על השני',
-    specs: { volume: '5 גרם × 2', material: 'קרטון', closure: 'פתיחה עליונה' , dimensions: '97 × 90 מ"מ'},
-    tags: ['IMC-GMP'],
-    hasToggle: true,
-    isInternal: false,
-    gallery: {
-      closed: generateGallery('combo-sativa-indica-vertical-closed', 5),
-      open: generateGallery('combo-sativa-indica-vertical-open', 6)
-    },
-    images: { primary: './images/products/combo-sativa-indica-vertical-closed.png' }
-  },
-
   // קופסא אופקית → אריזה אופקית
   {
     id: 'combo-sativa-indica-horizontal',
@@ -677,6 +659,24 @@ export const products = [
       open: generateGallery('combo-sativa-indica-horizontal-open', 5)
     },
     images: { primary: './images/products/combo-sativa-indica-horizontal-closed.png' }
+  },
+
+  // קופסא אנכית → אריזה אנכית
+  {
+    id: 'combo-sativa-indica-vertical',
+    sku: 'BZL-CB-002',
+    subcategoryId: 'combo-sativa-indica',
+    name: 'קופסא אנכית',
+    description: 'קופסא לשני מיכלי תפרחת אחד על השני',
+    specs: { volume: '5 גרם × 2', material: 'קרטון', closure: 'פתיחה עליונה' , dimensions: '97 × 90 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: true,
+    isInternal: false,
+    gallery: {
+      closed: generateGallery('combo-sativa-indica-vertical-closed', 5),
+      open: generateGallery('combo-sativa-indica-vertical-open', 6)
+    },
+    images: { primary: './images/products/combo-sativa-indica-vertical-closed.png' }
   }
 ];
 
