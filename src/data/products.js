@@ -684,4 +684,4 @@ export const getMainCategory = (id) => mainCategories.find(c => c.id === id);
 export const getSubcategoriesByParent = (parentId) => subcategories.filter(s => s.parentId === parentId);
 export const getSubcategory = (id) => subcategories.find(s => s.id === id);
 export const getProductsBySubcategory = (subcategoryId) => products.filter(p => p.subcategoryId === subcategoryId);
-export const getProduct = (id) => products.find(p => p.i
+export const getProduct = (id) => products.find(p => p.id === id);
