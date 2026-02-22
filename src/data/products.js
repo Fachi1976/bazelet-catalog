@@ -227,7 +227,7 @@ export const products = [
     subcategoryId: 'flowers-regular',
     name: 'אריזת מתנה מוקטנת לשקית DOY',
     description: 'קרטון מוקטן פתיחת מתנה לשקית DOY עם תחתית',
-    specs: { volume: '10 גרם', material: 'קרטון', closure: 'פתיחת מתנה' , dimensions: '132 × 190 מ"מ'},
+    specs: { volume: '10 גרם', material: 'קרטון', closure: 'פתיחת מתנה' , dimensions: '132 × 38 מ"מ'},
     tags: ['IMC-GMP'],
     hasToggle: true,
     isInternal: false,
@@ -353,7 +353,7 @@ export const products = [
     subcategoryId: 'prerolls-05',
     name: 'תרמיל בודד',
     description: 'תרמיל ל-2 יחידות מגולגלות 0.5 גרם',
-    specs: { volume: '0.5 גרם × 2', material: 'פלסטיק', closure: 'מכסה' , dimensions: '20 × 115 מ"מ'},
+    specs: { volume: '0.5 גרם × 2', material: 'פלסטיק', closure: 'מכסה child-proof' , dimensions: '20 × 115 מ"מ'},
     tags: ['IMC-GMP'],
     hasToggle: false,
     isInternal: true,
@@ -684,4 +684,4 @@ export const getMainCategory = (id) => mainCategories.find(c => c.id === id);
 export const getSubcategoriesByParent = (parentId) => subcategories.filter(s => s.parentId === parentId);
 export const getSubcategory = (id) => subcategories.find(s => s.id === id);
 export const getProductsBySubcategory = (subcategoryId) => products.filter(p => p.subcategoryId === subcategoryId);
-export const getProduct = (id) => products.find(p => p.id === id);
+export const getProduct = (id) => products.find(p => p.i
