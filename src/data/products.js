@@ -71,6 +71,20 @@ export const subcategories = [
     icon: './images/icons/icon-preroll-025.png'
   },
   {
+    id: 'prerolls-15',
+    parentId: 'prerolls',
+    name: 'מגולגלות 1.5 גרם',
+    description: 'אריזות למגולגלות 1.5 גרם',
+    icon: './images/icons/icon-preroll-15.png'
+  },
+  {
+    id: 'prerolls-2',
+    parentId: 'prerolls',
+    name: 'מגולגלות 2 גרם',
+    description: 'אריזות למגולגלות 2 גרם',
+    icon: './images/icons/icon-preroll-2.png'
+  },
+  {
     id: 'oil-products',
     parentId: 'oil',
     name: 'שמן',
@@ -426,6 +440,176 @@ export const products = [
     isInternal: true,
     gallery: null,
     images: { primary: './images/products/0.25-preroll-cone.png' }
+  },
+
+  // =============================================================
+  // מגולגלות 1.5 גרם
+  // =============================================================
+
+  // אריזה סטנדרטית - 7 מגולגלות 1.5 גרם
+  {
+    id: 'preroll-15-standard',
+    sku: 'BZL-PR-001',
+    subcategoryId: 'prerolls-15',
+    name: 'אריזה סטנדרטית',
+    description: 'אריזה ל-7 מגולגלות פתיחה עליונה',
+    specs: { volume: '1.5 גרם × 7', material: 'קרטון', closure: 'פתיחה עליונה' , dimensions: '118.5 × 125 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: true,
+    isInternal: false,
+    gallery: {
+      closed: generateGallery('preroll-(7)1.5gr-box-standart-closed', 6),
+      open: generateGallery('preroll-(7)1.5gr-box-standart-open', 6)
+    },
+    images: { primary: './images/products/preroll-(7)1.5gr-box-standart-closed.png' }
+  },
+
+  // אריזה פתיחה צידית - 7 מגולגלות 1.5 גרם
+  {
+    id: 'preroll-15-side',
+    sku: 'BZL-PR-002',
+    subcategoryId: 'prerolls-15',
+    name: 'אריזה פתיחה צידית',
+    description: 'אריזה ל-7 מגולגלות פתיחה צידית',
+    specs: { volume: '1.5 גרם × 7', material: 'קרטון', closure: 'פתיחה צידית' , dimensions: '211 × 32 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: true,
+    isInternal: false,
+    gallery: {
+      closed: generateGallery('preroll-(7)1.5gr-box-side-closed', 7),
+      open: generateGallery('preroll-(7)1.5gr-box-side-open', 7)
+    },
+    images: { primary: './images/products/preroll-(7)1.5gr-box-side-closed.png' }
+  },
+
+  // תרמיל בודד - מגולגלת 1.5 גרם
+  {
+    id: 'preroll-15-tube',
+    sku: 'BZL-PS-003',
+    subcategoryId: 'prerolls-15',
+    name: 'תרמיל בודד',
+    description: 'תרמיל ליחידה מגולגלת 1.5 גרם',
+    specs: { volume: '1.5 גרם', material: 'פלסטיק', closure: 'סגירה חוזרת, child-proof' , dimensions: '20 × 115 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: false,
+    isInternal: true,
+    gallery: null,
+    images: { primary: './images/products/preroll-tube-closed.png' }
+  },
+
+  // קופסא לתרמיל בודד - מגולגלת 1.5 גרם
+  {
+    id: 'preroll-15-tube-box',
+    sku: 'BZL-PS-007',
+    subcategoryId: 'prerolls-15',
+    name: 'קופסא לתרמיל בודד',
+    description: 'קרטון לתרמיל ליחידה מגולגלת 1.5 גרם',
+    specs: { volume: '1.5 גרם', material: 'קרטון', closure: 'פתיחה עליונה' , dimensions: '28 × 120 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: false,
+    isInternal: true,
+    gallery: null,
+    images: { primary: './images/products/preroll-tube-box.png' }
+  },
+
+  // קונוס 1.5 גרם
+  {
+    id: 'preroll-15-cone',
+    sku: 'BZL-PS-005',
+    subcategoryId: 'prerolls-15',
+    name: 'קונוס 1.5 גרם',
+    description: 'קונוס למגולגלת 1.5 גרם',
+    specs: { volume: '1.5 גרם', material: 'נייר+פילטר', closure: 'סגירה לאחר מילוי' , dimensions: '8 × 110 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: false,
+    isInternal: true,
+    gallery: null,
+    images: { primary: './images/products/1.5-2-preroll-cone.png' }
+  },
+
+  // =============================================================
+  // מגולגלות 2 גרם
+  // =============================================================
+
+  // אריזה סטנדרטית - 5 מגולגלות 2 גרם
+  {
+    id: 'preroll-2-standard',
+    sku: 'BZL-PR-003',
+    subcategoryId: 'prerolls-2',
+    name: 'אריזה סטנדרטית',
+    description: 'אריזה ל-5 מגולגלות פתיחה עליונה',
+    specs: { volume: '2 גרם × 5', material: 'קרטון', closure: 'פתיחה עליונה' , dimensions: '148 × 125 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: true,
+    isInternal: false,
+    gallery: {
+      closed: generateGallery('preroll-(5)2gr-box-standart-closed', 6),
+      open: generateGallery('preroll-(5)2gr-box-standart-open', 6)
+    },
+    images: { primary: './images/products/preroll-(5)2gr-box-standart-closed.png' }
+  },
+
+  // אריזה פתיחה צידית - 5 מגולגלות 2 גרם
+  {
+    id: 'preroll-2-side',
+    sku: 'BZL-PR-004',
+    subcategoryId: 'prerolls-2',
+    name: 'אריזה פתיחה צידית',
+    description: 'אריזה ל-5 מגולגלות פתיחה צידית',
+    specs: { volume: '2 גרם × 5', material: 'קרטון', closure: 'פתיחה צידית' , dimensions: '154 × 32 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: true,
+    isInternal: false,
+    gallery: {
+      closed: generateGallery('preroll-(5)2gr-box-side-closed', 6),
+      open: generateGallery('preroll-(5)2gr-box-side-open', 6)
+    },
+    images: { primary: './images/products/preroll-(5)2gr-box-side-closed.png' }
+  },
+
+  // תרמיל בודד - מגולגלת 2 גרם
+  {
+    id: 'preroll-2-tube',
+    sku: 'BZL-PS-003',
+    subcategoryId: 'prerolls-2',
+    name: 'תרמיל בודד',
+    description: 'תרמיל ליחידה מגולגלת 2 גרם',
+    specs: { volume: '2 גרם', material: 'פלסטיק', closure: 'סגירה חוזרת, child-proof' , dimensions: '20 × 115 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: false,
+    isInternal: true,
+    gallery: null,
+    images: { primary: './images/products/preroll-tube-closed.png' }
+  },
+
+  // קופסא לתרמיל בודד - מגולגלת 2 גרם
+  {
+    id: 'preroll-2-tube-box',
+    sku: 'BZL-PS-007',
+    subcategoryId: 'prerolls-2',
+    name: 'קופסא לתרמיל בודד',
+    description: 'קרטון לתרמיל ליחידה מגולגלת 2 גרם',
+    specs: { volume: '2 גרם', material: 'קרטון', closure: 'פתיחה עליונה' , dimensions: '28 × 120 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: false,
+    isInternal: true,
+    gallery: null,
+    images: { primary: './images/products/preroll-tube-box.png' }
+  },
+
+  // קונוס 2 גרם
+  {
+    id: 'preroll-2-cone',
+    sku: 'BZL-PS-006',
+    subcategoryId: 'prerolls-2',
+    name: 'קונוס 2 גרם',
+    description: 'קונוס למגולגלת 2 גרם',
+    specs: { volume: '2 גרם', material: 'נייר+פילטר', closure: 'סגירה לאחר מילוי' , dimensions: '8 × 110 מ"מ'},
+    tags: ['IMC-GMP'],
+    hasToggle: false,
+    isInternal: true,
+    gallery: null,
+    images: { primary: './images/products/1.5-2-preroll-cone.png' }
   },
 
   // =============================================================
