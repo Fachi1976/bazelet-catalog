@@ -1,0 +1,550 @@
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  mainCategories, getMainCategory, getSubcategory, getSubcategoriesByParent,
+  getProductsBySubcategory, getProduct, countByMain,
+} from './data/products.js';
+import { cardImages } from './data/cardImages.js';
+import { productDisplay } from './data/productDisplay.js';
+import './App.css';
+
+const PLACEHOLDER = './images/placeholder.png';
+const CONTACT = {
+  email: 'PACK.COORDINATOR@b-group.co.il',
+  phone: '054-8259082',
+  site: 'https://www.bazelet-pharma.co.il/',
+};
+
+// In these sub-categories the outer packaging is shown first, inner components after it
+const outerFirst = (subId) => subId === 'oil-products' || subId.startsWith('combo-');
+const sortProducts = (subId, list) =>
+  outerFirst(subId) ? [...list.filter((p) => !p.isInternal), ...list.filter((p) => p.isInternal)] : list;
+
+const pad = (n) => String(n).padStart(2, '0');
+const packWord = (n) => (n === 1 ? 'אריזה' : 'אריזות');
+
+// =====================================================
+// ROUTING (hash): #main / #main/sub / #main/sub/product
+// =====================================================
+function parseHash() {
+  const [m, s, p] = decodeURIComponent(window.location.hash.replace(/^#\/?/, '')).split('/');
+  const main = m ? getMainCategory(m) : null;
+  if (!main) return { main: null, sub: null, product: null };
+  const subs = getSubcategoriesByParent(main.id);
+  let sub = s ? getSubcategory(s) : null;
+  if (sub && sub.parentId !== main.id) sub = null;
+  if (!sub && subs.length === 1) sub = subs[0]; // single sub → straight to products
+  let product = p ? getProduct(p) : null;
+  if (product && (!sub || product.subcategoryId !== sub.id)) product = null;
+  return { main, sub, product };
+}
+const go = (...parts) => {
+  const h = parts.filter(Boolean).join('/');
+  window.location.hash = h ? h : '';
+  if (!h) history.replaceState(null, '', window.location.pathname + window.location.search);
+};
+
+// =====================================================
+// IMAGE GALLERY
+// =====================================================
+function ImageGallery({ images, alt }) {
+  const [i, setI] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  useEffect(() => setI(0), [images]);
+  if (!images || images.length === 0) return null;
+
+  const next = (e) => { e?.stopPropagation(); setI((v) => (v + 1) % images.length); };
+  const prev = (e) => { e?.stopPropagation(); setI((v) => (v - 1 + images.length) % images.length); };
+  const onTouchEnd = () => {
+    if (touchStart === null || touchEnd === null) return;
+    const d = touchStart - touchEnd;
+    if (Math.abs(d) > 50) (d > 0 ? prev() : next());
+    setTouchStart(null); setTouchEnd(null);
+  };
+
+  return (
+    <div className="gallery">
+      <div
+        className="gallery-stage"
+        onTouchStart={(e) => { setTouchEnd(null); setTouchStart(e.targetTouches[0].clientX); }}
+        onTouchMove={(e) => setTouchEnd(e.targetTouches[0].clientX)}
+        onTouchEnd={onTouchEnd}
+      >
+        <img src={images[i]} alt={`${alt} - זווית ${i + 1}`} draggable={false}
+          onError={(e) => { e.target.src = PLACEHOLDER; }} />
+      </div>
+      {images.length > 1 && (
+        <>
+          <button className="gallery-arrow right" onClick={prev} aria-label="הקודם">‹</button>
+          <button className="gallery-arrow left" onClick={next} aria-label="הבא">›</button>
+          <div className="gallery-counter">{pad(i + 1)} / {pad(images.length)}</div>
+          <div className="gallery-thumbs">
+            {images.map((src, idx) => (
+              <button key={src} className={`thumb ${idx === i ? 'on' : ''}`}
+                onClick={(e) => { e.stopPropagation(); setI(idx); }} aria-label={`זווית ${idx + 1}`}>
+                <img src={src} alt="" loading="lazy" />
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// =====================================================
+// 3D MODEL VIEWER (drag to rotate, scroll/pinch to zoom)
+// =====================================================
+let mvLoad = null;
+const ENV_HDR = './images/models/studio-env-3.hdr';
+const MESHOPT = './images/models/meshopt_decoder.js';
+function loadMV() {
+  mvLoad = mvLoad || import('@google/model-viewer').then((m) => {
+    const MV = customElements.get('model-viewer');
+    if (MV) MV.meshoptDecoderLocation = MESHOPT;
+    return m;
+  });
+  return mvLoad;
+}
+// Warm up the 3D engine + studio lighting in the background, so the first product opens fast
+if (typeof window !== 'undefined') {
+  const warm = () => { loadMV(); fetch(ENV_HDR).catch(() => {}); };
+  (window.requestIdleCallback || ((f) => setTimeout(f, 1500)))(warm);
+}
+// Animated box: click/tap the box (or the button) to open/close it while rotating
+function AnimatedModel({ src, alt, poster, radius, targetOpen, noOpen }) {
+  const [ready, setReady] = useState(!!(typeof customElements !== 'undefined' && customElements.get('model-viewer')));
+  const [open, setOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const pending = useRef(false);
+  const ref = useRef(null);
+  const anim = useRef({ raf: 0, t: 0 });
+  const down = useRef(null);
+  useEffect(() => {
+    if (ready) return;
+    loadMV().then(() => setReady(true));
+  }, [ready]);
+  useEffect(() => {
+    const v = ref.current; if (!v) return;
+    setLoaded(!!v.loaded); setProgress(0);
+    const onLoad = () => {
+      v.play(); v.pause(); v.currentTime = 0; anim.current.t = 0; anim.current.dir = false; setLoaded(true);
+      if (pending.current) { pending.current = false; setTimeout(() => toggleRef.current(), 300); }
+    };
+    const onProg = (e) => setProgress(e.detail?.totalProgress || 0);
+    v.addEventListener('load', onLoad);
+    v.addEventListener('progress', onProg);
+    return () => { v.removeEventListener('load', onLoad); v.removeEventListener('progress', onProg); cancelAnimationFrame(anim.current.raf); };
+  }, [ready, src]);
+  const toggle = () => {
+    const v = ref.current;
+    if (!v || !v.loaded) { pending.current = !pending.current; setOpen(pending.current); return; }
+    const next = !anim.current.dir; anim.current.dir = next; setOpen(next);
+    const dur = Math.max(0.01, (v.duration || 2) - 0.001);
+    const from = anim.current.t, to = next ? dur : 0;
+    v.cameraTarget = next && targetOpen ? targetOpen : 'auto auto auto';
+    cancelAnimationFrame(anim.current.raf);
+    const t0 = performance.now(), len = Math.abs(to - from) * 1000;
+    const step = (now) => {
+      const k = len ? Math.min(1, (now - t0) / len) : 1;
+      const t = from + (to - from) * k;
+      v.play(); v.pause(); v.currentTime = t; anim.current.t = t;
+      if (k < 1) anim.current.raf = requestAnimationFrame(step);
+    };
+    anim.current.raf = requestAnimationFrame(step);
+  };
+  const toggleRef = useRef(toggle); toggleRef.current = toggle;
+  const onDown = (e) => { down.current = { x: e.clientX, y: e.clientY, t: Date.now() }; };
+  const onUp = (e) => {
+    const d = down.current; down.current = null;
+    if (!noOpen && d && Math.hypot(e.clientX - d.x, e.clientY - d.y) < 6 && Date.now() - d.t < 500) toggle();
+  };
+  if (!ready) return (
+    <div className="gallery model"><div className="gallery-stage"><img src={poster || PLACEHOLDER} alt={alt} /></div>
+      <div className="model-loading"><span>טוען תלת מימד…</span><div className="model-bar"><i style={{ width: '8%' }} /></div></div>
+    </div>
+  );
+  return (
+    <div className="gallery model">
+      {!noOpen && <button className="open-btn" onClick={toggle}>{open ? 'סגירה' : 'פתיחה'}</button>}
+      <model-viewer
+        ref={ref}
+        key={src}
+        src={src}
+        alt={alt}
+        poster={poster}
+        animation-name="Animation"
+        camera-controls=""
+        touch-action="pan-y"
+        auto-rotate=""
+        auto-rotate-delay="2500"
+        rotation-per-second="18deg"
+        interaction-prompt="none"
+        interpolation-decay="120"
+        camera-orbit={`35deg 65deg ${radius || "115%"}`}
+        min-camera-orbit="auto auto 50%"
+        max-camera-orbit="auto auto 160%"
+        shadow-intensity="1"
+        shadow-softness="0.6"
+        exposure="1.0"
+        tone-mapping="neutral"
+        environment-image={ENV_HDR}
+        loading="eager"
+        reveal="auto"
+        onPointerDown={onDown}
+        onPointerUp={onUp}
+        style={{ width: '100%', height: '100%', background: 'transparent', '--poster-color': 'transparent', cursor: noOpen ? 'grab' : 'pointer' }}
+      >
+        <div slot="progress-bar" />
+      </model-viewer>
+      {!loaded && (
+        <div className="model-loading"><span>טוען תלת מימד…</span>
+          <div className="model-bar"><i style={{ width: `${Math.round(progress * 100)}%` }} /></div>
+        </div>
+      )}
+      <div className="model-hint">{noOpen ? 'גררו כדי לסובב · גלגלו להגדלה' : 'לחצו על האריזה כדי לפתוח · גררו כדי לסובב'}</div>
+    </div>
+  );
+}
+
+
+// Desktop-only: on hover the card photo turns into the rotating 3D model, which opens
+const canHover3D = typeof window !== 'undefined' && window.matchMedia &&
+  window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+function HoverModel({ model, active }) {
+  const [mount, setMount] = useState(false);
+  const [shown, setShown] = useState(false);
+  const ref = useRef(null);
+  const st = useRef({ raf: 0, t: 0, loaded: false });
+  useEffect(() => { if (active && !mount) loadMV().then(() => setMount(true)); }, [active, mount]);
+  useEffect(() => {
+    const v = ref.current; if (!v) return;
+    const onLoad = () => { v.play(); v.pause(); v.currentTime = 0; st.current.loaded = true; setShown(activeRef.current); run(activeRef.current); };
+    v.addEventListener('load', onLoad);
+    return () => { v.removeEventListener('load', onLoad); cancelAnimationFrame(st.current.raf); };
+  }, [mount]);
+  const activeRef = useRef(active); activeRef.current = active;
+  const run = (open) => {
+    const v = ref.current; if (!v || !st.current.loaded) return;
+    cancelAnimationFrame(st.current.raf);
+    const dur = Math.max(0.01, (v.duration || 2) - 0.001);
+    const from = st.current.t, to = open ? dur : 0;
+    v.cameraTarget = open && model.target ? model.target : 'auto auto auto';
+    const delay = open ? 450 : 0, t0 = performance.now() + delay, len = Math.abs(to - from) * 900;
+    const step = (now) => {
+      const k = now < t0 ? 0 : (len ? Math.min(1, (now - t0) / len) : 1);
+      const t = from + (to - from) * k;
+      v.play(); v.pause(); v.currentTime = t; st.current.t = t;
+      if (k < 1) st.current.raf = requestAnimationFrame(step);
+    };
+    st.current.raf = requestAnimationFrame(step);
+  };
+  useEffect(() => {
+    if (!st.current.loaded) return;
+    setShown(active); run(active);
+    const v = ref.current;
+    if (v && !active) { const id = setTimeout(() => { v.resetTurntableRotation?.(0); }, 500); return () => clearTimeout(id); }
+  }, [active]);
+  if (!mount) return null;
+  return (
+    <model-viewer
+      ref={ref}
+      class={`card-3d ${shown ? 'on' : ''}`}
+      src={model.src}
+      animation-name="Animation"
+      auto-rotate=""
+      auto-rotate-delay="0"
+      rotation-per-second="40deg"
+      interaction-prompt="none"
+      disable-zoom=""
+      camera-orbit={`35deg 65deg ${model.radius}`}
+      interpolation-decay="160"
+      shadow-intensity="1"
+      shadow-softness="0.6"
+      tone-mapping="neutral"
+      environment-image={ENV_HDR}
+      loading="eager"
+      reveal="auto"
+      style={{ '--poster-color': 'transparent', background: 'transparent' }}
+    ></model-viewer>
+  );
+}
+// Warm up the home-page models on desktop so the first hover is instant
+if (canHover3D) {
+  (window.requestIdleCallback || ((f) => setTimeout(f, 2500)))(() => {
+    loadMV();
+    Object.values(cardImages).forEach((c) => c.model && fetch(c.model.src).catch(() => {}));
+  });
+}
+
+// =====================================================
+// CARDS
+// =====================================================
+function CategoryCard({ index, item, count, onClick }) {
+  const img = cardImages[item.id];
+  const has3d = canHover3D && img?.model;
+  const [hov, setHov] = useState(false);
+  return (
+    <button className={`card ${has3d ? 'has-3d' : ''} ${hov ? 'hov' : ''}`} onClick={onClick}
+      onMouseEnter={has3d ? () => setHov(true) : undefined} onMouseLeave={has3d ? () => setHov(false) : undefined}>
+      <div className={`card-photo ${img?.dark ? 'dark' : ''} ${img?.studio ? 'studio' : ''}`}>
+        {has3d && <HoverModel model={img.model} active={hov} />}
+        <span className="card-idx">{pad(index + 1)}</span>
+        <span className="card-count">{count} {packWord(count)}</span>
+        {img ? (
+          <>
+            <img className="img-base" src={img.base} alt={item.name} />
+            <img className="img-hover" src={img.hover} alt="" aria-hidden="true" />
+          </>
+        ) : (
+          <img className="img-base icon" src={item.icon} alt={item.name} />
+        )}
+      </div>
+      <div className="card-body">
+        <h2 className="card-name">{item.name}</h2>
+        <p className="card-desc">{item.description}</p>
+        <span className="card-cta">לצפייה באריזות <b>←</b></span>
+      </div>
+    </button>
+  );
+}
+
+function ProductCard({ index, product, onClick }) {
+  const { size, base, hover, dark, studio } = productDisplay(product);
+  return (
+    <button className="card product" onClick={onClick}>
+      <div className={`card-photo ${dark ? 'dark' : ''} ${studio ? 'studio' : ''}`} style={{ '--s': size }}>
+        <span className="card-idx">{pad(index + 1)}</span>
+        {product.isInternal && <span className="card-count internal">רכיב פנימי</span>}
+        <img className="img-base sized" src={base || PLACEHOLDER} alt={product.name} loading="lazy"
+          onError={(e) => { e.target.src = PLACEHOLDER; }} />
+        {hover && <img className="img-hover sized" src={hover} alt="" aria-hidden="true" loading="lazy" />}
+      </div>
+      <div className="card-body">
+        {product.sku && <span className="card-sku">{product.sku}</span>}
+        <h3 className="card-name">{product.name}</h3>
+        <p className="card-desc">{product.description}</p>
+        <span className="card-cta">לפרטי האריזה <b>←</b></span>
+      </div>
+    </button>
+  );
+}
+
+// =====================================================
+// PAGE HERO
+// =====================================================
+function Hero({ crumbs, title, text, eyebrow, big, children }) {
+  return (
+    <section className={`hero ${big ? 'big' : ''}`}>
+      <div className="wrap hero-in">
+        {crumbs && (
+          <nav className="crumbs">
+            {crumbs.map((c, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <span className="sep">/</span>}
+                {c.onClick ? <a onClick={c.onClick}>{c.label}</a> : <span>{c.label}</span>}
+              </React.Fragment>
+            ))}
+          </nav>
+        )}
+        {eyebrow && <div className="eyebrow">{eyebrow}</div>}
+        <h1>{title}</h1>
+        <div className="rule" />
+        {text && <p>{text}</p>}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+// =====================================================
+// APP
+// =====================================================
+export default function App() {
+  const [route, setRoute] = useState(parseHash);
+  const [viewState, setViewState] = useState('closed');
+  const { main, sub, product } = route;
+
+  useEffect(() => {
+    const onHash = () => { setRoute(parseHash()); window.scrollTo({ top: 0 }); };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+  useEffect(() => setViewState('closed'), [product]);
+
+  const singleSub = main && getSubcategoriesByParent(main.id).length === 1;
+  const back = () => {
+    if (product) go(main.id, singleSub ? null : sub.id);
+    else if (sub && !singleSub) go(main.id);
+    else go();
+  };
+  const crumbsFor = () => {
+    const c = [{ label: 'קטלוג', onClick: () => go() }];
+    if (main) c.push({ label: main.name, onClick: (sub || product) && !(singleSub && !product) ? () => go(main.id) : null });
+    if (sub && !singleSub) c.push({ label: sub.name, onClick: product ? () => go(main.id, sub.id) : null });
+    if (product) c.push({ label: product.name });
+    return c;
+  };
+
+  // ---------- Level 1 ----------
+  const renderHome = () => {
+    const total = mainCategories.reduce((n, c) => n + countByMain(c.id), 0);
+    return (
+      <>
+        <Hero big eyebrow="WHITE-LABEL PACKAGING SOLUTIONS" title="קטלוג אריזות קנאביס"
+          text="בזלת מחויבת ללקוחותיה ומרחיבה את מגוון פתרונות האריזה, מתפרחות ועד שמנים, כדי לאפשר לכם לבנות פורטפוליו מוצרים מדויק בהתאם לאסטרטגיה המסחרית שלכם. האריזות מוצגות ללא מיתוג, לבחירה והתאמה מלאה לצרכי המותג.">
+          <div className="strip"><div className="wrap strip-in">
+            <span>IMC-GMP</span><i>·</i><span>{total} פתרונות אריזה</span><i>·</i>
+            <span>{mainCategories.length} קטגוריות</span><i>·</i><span>ללא מיתוג – התאמה מלאה למותג</span>
+          </div></div>
+        </Hero>
+        <main className="wrap page">
+          <div className="sec-head"><h2>בחרו קטגוריה</h2><span>{pad(mainCategories.length)} CATEGORIES</span></div>
+          <div className="grid four">
+            {mainCategories.map((c, i) => (
+              <CategoryCard key={c.id} index={i} item={c} count={countByMain(c.id)} onClick={() => go(c.id)} />
+            ))}
+          </div>
+        </main>
+      </>
+    );
+  };
+
+  // ---------- Level 2 ----------
+  const renderSubs = () => {
+    const subs = getSubcategoriesByParent(main.id);
+    const total = countByMain(main.id);
+    return (
+      <>
+        <Hero crumbs={crumbsFor()} title={main.name} text={main.description} />
+        <main className="wrap page">
+          <div className="sec-head"><h2>בחרו סוג אריזה</h2><span>{pad(subs.length)} · {total} {packWord(total)}</span></div>
+          <div className="grid">
+            {subs.map((s, i) => (
+              <CategoryCard key={s.id} index={i} item={s} count={getProductsBySubcategory(s.id).length}
+                onClick={() => go(main.id, s.id)} />
+            ))}
+          </div>
+          <button className="back" onClick={back}>→ חזרה</button>
+        </main>
+      </>
+    );
+  };
+
+  // ---------- Level 3 ----------
+  const renderProducts = () => {
+    const prods = sortProducts(sub.id, getProductsBySubcategory(sub.id));
+    return (
+      <>
+        <Hero crumbs={crumbsFor()} title={singleSub ? main.name : sub.name} text={sub.description} />
+        <main className="wrap page">
+          <div className="sec-head"><h2>אריזות ורכיבים</h2><span>{pad(prods.length)} ITEMS</span></div>
+          <div className="grid">
+            {prods.map((p, i) => (
+              <ProductCard key={p.id} index={i} product={p} onClick={() => go(main.id, sub.id, p.id)} />
+            ))}
+          </div>
+          <button className="back" onClick={back}>→ חזרה</button>
+        </main>
+      </>
+    );
+  };
+
+  // ---------- Level 4 ----------
+  const renderProduct = () => {
+    const p = product;
+    const darkBg = productDisplay(p).dark;
+    const images = p.gallery ? (p.gallery[viewState] || p.gallery.closed || []) : [];
+    const labels = { volume: 'מכיל', dimensions: 'מידות', material: 'חומר', closure: 'סגירה' };
+    return (
+      <>
+        <Hero crumbs={crumbsFor()} title={p.name} text={p.description} />
+        <main className="wrap page">
+          <div className="detail">
+            <div className={`detail-media ${darkBg ? 'dark' : ''}`}>
+              {(p.gallery || p.model3d) ? (
+                <>
+                  {p.hasToggle && !p.model3d?.anim && (
+                    <div className="toggle">
+                      <button className={viewState === 'closed' ? 'on' : ''} onClick={() => setViewState('closed')}>סגור</button>
+                      <button className={viewState === 'open' ? 'on' : ''} onClick={() => setViewState('open')}>פתוח</button>
+                    </div>
+                  )}
+                  {p.model3d?.anim ? (
+                    <AnimatedModel radius={p.model3d.radius} src={p.model3d.anim} targetOpen={p.model3d.targetOpen}
+                      alt={p.name} poster={p.images?.primary} />
+                  ) : p.model3d?.static ? (
+                    <AnimatedModel noOpen radius={p.model3d.radius} src={p.model3d.static} alt={p.name} poster={p.images?.primary} />
+                  ) : (
+                    <ImageGallery images={images} alt={p.name} />
+                  )}
+                </>
+              ) : (
+                <div className="gallery"><div className="gallery-stage">
+                  <img src={p.images?.primary || PLACEHOLDER} alt={p.name} onError={(e) => { e.target.src = PLACEHOLDER; }} />
+                </div></div>
+              )}
+            </div>
+
+            <div className="detail-info">
+              {p.sku && <div className="sku">מק״ט <b>{p.sku}</b></div>}
+              {p.isInternal && <div className="internal-note">רכיב פנימי – אריזה ראשונית</div>}
+              {p.tags?.length > 0 && (
+                <div className="tags">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>
+              )}
+              {p.specs && (
+                <div className="specs">
+                  <h3>מפרט טכני</h3>
+                  <table><tbody>
+                    {Object.keys(labels).map((k) => p.specs[k] ? (
+                      <tr key={k}><td>{labels[k]}</td><td>{p.specs[k]}</td></tr>
+                    ) : null)}
+                  </tbody></table>
+                </div>
+              )}
+            </div>
+          </div>
+          <button className="back" onClick={back}>→ חזרה</button>
+        </main>
+      </>
+    );
+  };
+
+  return (
+    <div className="app" dir="rtl">
+      <header className="head">
+        <div className="wrap head-in">
+          <a className="logo" onClick={() => go()}>
+            <img src="./images/bazelet-logo.png" alt="Bazelet" />
+            <span>PACKAGING CATALOG</span>
+          </a>
+          <nav className="nav">
+            {mainCategories.map((c) => (
+              <a key={c.id} className={main?.id === c.id ? 'on' : ''} onClick={() => go(c.id)}>{c.name}</a>
+            ))}
+            <span className="badge">IMC-GMP</span>
+          </nav>
+        </div>
+      </header>
+
+      <div className="content">
+        {!main ? renderHome() : product ? renderProduct() : sub ? renderProducts() : renderSubs()}
+      </div>
+
+      <footer className="foot">
+        <div className="wrap foot-in">
+          <div className="foot-contact">
+            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+            <i>·</i>
+            <a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a>
+            <i>·</i>
+            <a href={CONTACT.site} target="_blank" rel="noopener noreferrer">www.bazelet-pharma.co.il</a>
+          </div>
+          <div className="foot-copy">© 2026 BAZELET GROUP · IMC-GMP CERTIFIED CANNABIS MANUFACTURER</div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
